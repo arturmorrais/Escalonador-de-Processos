@@ -25,3 +25,13 @@ class ListaProcessos:
             self.cauda.proximo = processo
             self.cauda = processo
             processo.proximo = None
+
+    def remover_inicio(self):
+        if self.cabeca is None:
+            return None
+        processo = self.cabeca
+        self.cabeca = self.cabeca.proximo
+        if self.cabeca is None:
+            self.cauda = None
+        processo.proximo = None
+        return processo
