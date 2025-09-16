@@ -47,3 +47,11 @@ class ListaProcessos:
                 'P(id={}, prio={}, ciclos={})'.format(atual.id_proc, atual.prioridade_atual, atual.ciclos_necessarios))
             atual = atual.proximo
         return ' -> '.join(processos)
+
+class Scheduler:
+    def __init__(self):
+        self.lista_alta_prioridade = ListaProcessos()
+        self.lista_media_prioridade = ListaProcessos()
+        self.lista_baixa_prioridade = ListaProcessos()
+        self.lista_bloqueados = ListaProcessos()
+        self.contador_ciclos_alta = 0
