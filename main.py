@@ -38,3 +38,12 @@ class ListaProcessos:
 
     def esta_vazia(self):
         return self.cabeca is None
+
+    def __repr__(self):
+        processos = []
+        atual = self.cabeca
+        while atual:
+            processos.append(
+                'P(id={}, prio={}, ciclos={})'.format(atual.id_proc, atual.prioridade_atual, atual.ciclos_necessarios))
+            atual = atual.proximo
+        return ' -> '.join(processos)
