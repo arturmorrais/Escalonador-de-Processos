@@ -11,3 +11,17 @@ class Processo:
 Prioridade_alta = 1
 Prioridade_media = 2
 Prioridade_baixa = 3
+
+class ListaProcessos:
+    def __init__(self):
+        self.cabeca = None
+        self.cauda = None
+
+    def adicionar_fim(self, processo):
+        if self.cabeca is None:
+            self.cabeca = processo
+            self.cauda = processo
+        else:
+            self.cauda.proximo = processo
+            self.cauda = processo
+            processo.proximo = None
