@@ -35,3 +35,6 @@ class ListaProcessos:
             self.cauda = None
         processo.proximo = None
         return processo
+
+    def esta_vazia(self):
+        return self.cabeca is None
