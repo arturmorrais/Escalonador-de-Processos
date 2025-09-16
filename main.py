@@ -67,3 +67,15 @@ class Scheduler:
                     self.lista_media_prioridade.adicionar_fim(processo)
                 else:
                     self.lista_baixa_prioridade.adicionar_fim(processo)
+
+        processo_em_execucao = None
+
+        if self.contador_ciclos_alta >= 5:
+            if not self.lista_media_prioridade.esta_vazia():
+                processo_em_execucao = self.lista_media_prioridade.remover_inicio()
+                self.contador_ciclos_alta = 0
+                print('Regra de anti-inanição ativada!')
+            elif not self.lista_baixa_prioridade.esta_vazia():
+                processo_em_execucao = self.lista_baixa_prioridade.remover_inicio()
+                self.contador_ciclos_alta = 0
+                print('Regra de anti-inanição ativada (nenhum processo médio)!')
