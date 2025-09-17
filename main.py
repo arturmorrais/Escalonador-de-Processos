@@ -79,3 +79,14 @@ class Scheduler:
                 processo_em_execucao = self.lista_baixa_prioridade.remover_inicio()
                 self.contador_ciclos_alta = 0
                 print('Regra de anti-inanição ativada (nenhum processo médio)!')
+
+        if processo_em_execucao is None:
+            if not self.lista_alta_prioridade.esta_vazia():
+                processo_em_execucao = self.lista_alta_prioridade.remover_inicio()
+                self.contador_ciclos_alta += 1
+            elif not self.lista_media_prioridade.esta_vazia():
+                processo_em_execucao = self.lista_media_prioridade.remover_inicio()
+                self.contador_ciclos_alta = 0
+            elif not self.lista_baixa_prioridade.esta_vazia():
+                processo_em_execucao = self.lista_baixa_prioridade.remover_inicio()
+                self.contador_ciclos_alta = 0
