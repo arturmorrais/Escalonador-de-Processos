@@ -99,4 +99,17 @@ class Scheduler:
                 print(
                     'BLOQUEADO: Processo ID {} ({}) precisa de recurso "DISCO".'.format(processo_em_execucao.id_proc, processo_em_execucao.nome))
                 processo_em_execucao.recurso_necessario = None
-                self.lista_bloqueados.adicionar_fim(processo_em_execucao)        
+                self.lista_bloqueados.adicionar_fim(processo_em_execucao)
+            else:
+                processo_em_execucao.ciclos_necessarios -= 1
+                if processo_em_execucao.ciclos_necessarios <= 0:
+                    print('TERMINADO: Processo ID {} ({}).'.format(processo_em_execucao.id_proc, processo_em_execucao.nome))
+                else:
+                    if processo_em_execucao.prioridade_atual == Prioridade_alta:
+                        self.lista_alta_prioridade.adicionar_fim(processo_em_execucao)
+                    elif processo_em_execucao.prioridade_atual == Prioridade_media:
+                        self.lista_media_prioridade.adicionar_fim(processo_em_execucao)
+                    else:
+                        self.lista_baixa_prioridade.adicionar_fim(processo_em_execucao)
+        else:
+            print('Nenhum processo para executar. Fim da simulação.')    
