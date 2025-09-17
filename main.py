@@ -90,3 +90,13 @@ class Scheduler:
             elif not self.lista_baixa_prioridade.esta_vazia():
                 processo_em_execucao = self.lista_baixa_prioridade.remover_inicio()
                 self.contador_ciclos_alta = 0
+
+        if processo_em_execucao:
+            print('EXECUTANDO: Processo ID {} ({}), prioridade {}. Ciclos restantes: {}'.format(
+                processo_em_execucao.id_proc, processo_em_execucao.nome, processo_em_execucao.prioridade_atual, processo_em_execucao.ciclos_necessarios))
+
+            if processo_em_execucao.recurso_necessario == 'DISCO':
+                print(
+                    'BLOQUEADO: Processo ID {} ({}) precisa de recurso "DISCO".'.format(processo_em_execucao.id_proc, processo_em_execucao.nome))
+                processo_em_execucao.recurso_necessario = None
+                self.lista_bloqueados.adicionar_fim(processo_em_execucao)        
