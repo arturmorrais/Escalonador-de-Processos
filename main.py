@@ -1,3 +1,5 @@
+import os
+
 class Processo:
     def __init__(self, id_proc, nome, prioridade, ciclos, recurso=None):
         self.id_proc = id_proc
@@ -112,4 +114,14 @@ class Scheduler:
                     else:
                         self.lista_baixa_prioridade.adicionar_fim(processo_em_execucao)
         else:
-            print('Nenhum processo para executar. Fim da simulação.')    
+            print('Nenhum processo para executar. Fim da simulação.')
+
+def carregar_processos(caminho_arquivo):
+    processos = []
+    if not os.path.exists(caminho_arquivo):
+        print('Erro: Arquivo "{}" não encontrado.'.format(caminho_arquivo))
+        return processos
+    
+    with open(caminho_arquivo, 'r') as f:
+        pass
+    return processos
