@@ -124,16 +124,6 @@ def carregar_processos(caminho_arquivo):
         return processos
     
     with open(caminho_arquivo, 'r') as f:
-        pass
-    return processos
-
-def carregar_processos(caminho_arquivo):
-    processos = []
-    if not os.path.exists(caminho_arquivo):
-        print('Erro: Arquivo "{}" não encontrado.'.format(caminho_arquivo))
-        return processos
-
-    with open(caminho_arquivo, 'r') as f:
         for linha in f:
             try:
                 partes = linha.strip().split(',')
