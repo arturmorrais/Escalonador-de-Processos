@@ -1,4 +1,5 @@
 import os
+import time
 
 class Processo:
     def __init__(self, id_proc, nome, prioridade, ciclos, recurso=None):
@@ -154,3 +155,42 @@ def carregar_processos(caminho_arquivo):
                 print('Aviso: Linha inválida no arquivo de processos: "{}"'.format(linha.strip()))
                 continue
     return processos
+
+def main():
+    caminho_arquivo = 'processos.txt'
+    processos_iniciais = carregar_processos(caminho_arquivo)
+    if not processos_iniciais:
+        return
+
+    scheduler = Scheduler()
+    for p in processos_iniciais:
+        if p.prioridade_atual == Prioridade_alta:
+            scheduler.lista_alta_prioridade.adicionar_fim(p)
+        elif p.prioridade_atual == Prioridade_media:
+            scheduler.lista_media_prioridade.adicionar_fim(p)
+        else:
+            scheduler.lista_baixa_prioridade.adicionar_fim(p)
+    
+    ciclo = 0
+    while True:
+        ciclo += 1
+        print('\n======== CICLO {} ========'.format(ciclo))
+        print('Estado atual das filas:')
+        print('  Fila Alta Prioridade: {}'.format(scheduler.lista_alta_prioridade))
+        print('  Fila Média Prioridade: {}'.format(scheduler.lista_media_prioridade))
+        print('  Fila Baixa Prioridade: {}'.format(scheduler.lista_baixa_prioridade))
+        print('  Fila Bloqueados: {}'.format(scheduler.lista_bloqueados))
+        print('-' * 20)
+        
+        if (scheduler.lista_alta_prioridade.esta_vazia() and
+                scheduler.lista_media_prioridade.esta_vazia() and
+                scheduler.lista_baixa_prioridade.esta_vazia() and
+                scheduler.lista_bloqueados.esta_vazia()):
+            print('\nTodos os processos foram executados. Fim da simulação.')
+            break
+
+        scheduler.executar_ciclo_de_cpu()
+        time.sleep(1)
+
+if __name__ == '__main__':
+    main()
