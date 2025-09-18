@@ -1,0 +1,7 @@
+# Exemplo do aqruivo processos.txt
+
+1,Tarefa_A,1,5,
+2,Tarefa_B,2,3,
+3,Tarefa_C,3,10,
+4,Tarefa_D,1,4,DISCO
+5,Tarefa_E,1,2,
