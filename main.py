@@ -125,3 +125,32 @@ def carregar_processos(caminho_arquivo):
     with open(caminho_arquivo, 'r') as f:
         pass
     return processos
+
+def carregar_processos(caminho_arquivo):
+    processos = []
+    if not os.path.exists(caminho_arquivo):
+        print('Erro: Arquivo "{}" não encontrado.'.format(caminho_arquivo))
+        return processos
+
+    with open(caminho_arquivo, 'r') as f:
+        for linha in f:
+            try:
+                partes = linha.strip().split(',')
+                if len(partes) < 4:
+                    continue
+                
+                id_proc = int(partes[0])
+                nome = partes[1].strip()
+                prioridade = int(partes[2])
+                ciclos = int(partes[3])
+                
+                recurso = partes[4].strip().upper() if len(partes) > 4 and partes[4] else None
+                if recurso != 'DISCO':
+                    recurso = None
+
+                processo = Processo(id_proc, nome, prioridade, ciclos, recurso)
+                processos.append(processo)
+            except (ValueError, IndexError):
+                print('Aviso: Linha inválida no arquivo de processos: "{}"'.format(linha.strip()))
+                continue
+    return processos
